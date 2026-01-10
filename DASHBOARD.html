@@ -67,7 +67,13 @@
         pings.appendChild(dot);
         setTimeout(() => dot.remove(), 2000);
     }, 1000);
-</script><div class="box status-panel">
+        setInterval(() => {
+            fetch('http://localhost:5000/api/storage')
+            .then(r=>r.json())
+            .then(d => document.getElementById('storageCount').innerText = d.count)
+            .catch(()=> {});
+        }, 5000);
+    </script><div class="box status-panel">
             <h3>TARGETS</h3>
             <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
                 <span style="font-size:2rem;">☁️</span><br>
@@ -113,9 +119,16 @@
                 });
             }
         });
+            setInterval(() => {
+            fetch('http://localhost:5000/api/storage')
+            .then(r=>r.json())
+            .then(d => document.getElementById('storageCount').innerText = d.count)
+            .catch(()=> {});
+        }, 5000);
     </script>
 </body>
 </html>
+
 
 
 

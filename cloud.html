@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sovereign Cloud | V2</title>
+    <link rel="stylesheet" href="css/platinum.css">
+    <style>
+        .drop-zone { border: 2px dashed var(--accent); padding: 40px; text-align: center; transition: 0.3s; cursor: pointer; }
+        .drop-zone:hover { background: rgba(0,255,255,0.1); }
+        .grid-files { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .file-card { background: rgba(255,255,255,0.05); padding: 10px; text-align: center; border: 1px solid #333; transition: 0.3s; overflow: hidden; }
+        .file-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .preview { width: 100%; height: 80px; object-fit: cover; margin-bottom: 5px; background: #000; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container" style="display:block;max-width:1000px;margin:30px auto;">
+        <div class="box header" style="text-align:center;">
+            <h1>☁️ السحابة السيادية (V2)</h1>
+            <p id="stats">جاري التحميل...</p>
+        </div>
+
+        <div class="box drop-zone" onclick="document.getElementById('fileInput').click()">
+            <h2>📥 اسحب الملفات هنا أو اضغط للرفع</h2>
+            <input type="file" id="fileInput" hidden onchange="uploadFile(this.files[0])">
+        </div>
+
+        <div class="grid-files" id="gallery"></div>
+        <br>
+        <a href="index.html" style="color:var(--platinum);text-decoration:none;">[ عودة للقاعدة ]</a>
+    </div>
+
+    <script>
+        const API = 'http://localhost:5000/api';
+
+        async function loadFiles() {
+            const res = await fetch(API + '/files');
+            const files = await res.json();
+            const gal = document.getElementById('gallery');
+            gal.innerHTML = '';
+            
+            files.forEach(f => {
+                let icon = '📄';
+                let previewHTML = \<div class="preview">\</div>\;
+                
+                if(f.type === 'image') previewHTML = \<img src="\/download/\" class="preview">\;
+                if(f.type === 'video') icon = '🎬';
+
+                gal.innerHTML += \
+                <div class="file-card">
+                    <a href="\/download/\" target="_blank" style="text-decoration:none;color:inherit;">
+                        \
+                        <div style="font-size:0.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">\</div>
+                        <div style="font-size:0.7rem;color:#888;">\</div>
+                    </a>
+                </div>\;
+            });
+            
+            // Update stats
+            fetch(API + '/storage').then(r=>r.json()).then(d => {
+                document.getElementById('stats').innerText = \\ ملفات | \ KB مستخدمة\;
+            });
+        }
+
+        async function uploadFile(file) {
+            if(!file) return;
+            const data = new FormData();
+            data.append('file', file);
+            document.querySelector('.drop-zone h2').innerText = '⏳ جاري الرفع...';
+            await fetch(API + '/upload', {method:'POST', body:data});
+            document.querySelector('.drop-zone h2').innerText = '📥 اسحب الملفات هنا أو اضغط للرفع';
+            loadFiles();
+        }
+
+        loadFiles();
+        
+        // Drag & Drop Logic
+        const drop = document.querySelector('.drop-zone');
+        drop.ondragover = (e) => { e.preventDefault(); drop.style.borderColor = '#fff'; };
+        drop.ondragleave = () => { drop.style.borderColor = 'var(--accent)'; };
+        drop.ondrop = (e) => { e.preventDefault(); uploadFile(e.dataTransfer.files[0]); };
+    </script>
+</body>
+</html>

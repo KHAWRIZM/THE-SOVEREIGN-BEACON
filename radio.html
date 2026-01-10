@@ -2,40 +2,39 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Sovereign Radio | صوت الأحرار</title>
+    <title>Sovereign Radio | LIVE</title>
     <link rel="stylesheet" href="css/dashboard.css">
-    <style>
-        .visualizer { display: flex; align-items: flex-end; height: 100px; gap: 2px; justify-content: center; }
-        .bar { width: 10px; background: #ce0000; animation: bounce 1s infinite ease-in-out; }
-        @keyframes bounce { 0%, 100% { height: 10px; } 50% { height: 80px; } }
-    </style>
 </head>
 <body>
     <div class="container" style="display:block;max-width:600px;margin:50px auto;text-align:center;">
         <div class="box header">
-            <h1>📡 إذاعة الأحرار</h1>
-            <p>Sovereign Radio - 99.9 FM (Digital)</p>
+            <h1>📡 إذاعة الأحرار (بث حي)</h1>
+            <p>Sovereign Radio - 99.9 FM</p>
         </div>
         
-        <div class="box" style="margin-top:20px;height:200px;">
-            <div class="visualizer" id="viz">
+        <div class="box" style="margin-top:20px;">
+            <div class="visualizer" id="viz" style="height:50px;margin-bottom:20px;">
                 </div>
-            <h2 style="margin-top:20px;color:#fff;">LIVE: صوت الحقيقة</h2>
-            <p style="color:#0f0;">Status: BROADCASTING...</p>
-        </div>
+            
+            <audio id="player" controls style="width:100%;" crossorigin="anonymous">
+                <source src="https://ice2.somafm.com/dronezone-128-mp3" type="audio/mpeg">
+                متصفحك لا يدعم الراديو.
+            </audio>
 
+            <h2 style="margin-top:20px;color:#0f0;">LIVE: Drone Zone Ambient</h2>
+            <p>Soundtrack for Hacking the Planet.</p>
+        </div>
         <br>
         <a href="index.html" class="inject-btn" style="text-decoration:none;">[ عودة للمنارة ]</a>
     </div>
-
     <script>
         const viz = document.getElementById('viz');
-        for(let i=0; i<20; i++) {
+        for(let i=0; i<30; i++) {
             let bar = document.createElement('div');
-            bar.className = 'bar';
-            bar.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+            bar.style.cssText = 'width:5px;background:#ce0000;margin:1px;animation:bounce '+Math.random()+'s infinite;';
             viz.appendChild(bar);
         }
     </script>
+    <style>@keyframes bounce { 0%,100%{height:5px} 50%{height:40px} }</style>
 </body>
 </html>

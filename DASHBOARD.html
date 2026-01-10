@@ -51,7 +51,23 @@
             </div>
         </div>
 
-        <div class="box status-panel">
+        <div class="box" style="grid-column: 1 / -1; height: 300px; position: relative; overflow: hidden;">
+    <h3>🌍 GLOBAL INFLUENCE MAP</h3>
+    <div style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') no-repeat center; background-size: contain; width: 100%; height: 100%; opacity: 0.3;"></div>
+    <div id="pings" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+</div>
+<script>
+    // Simulate Global Pings
+    const pings = document.getElementById('pings');
+    setInterval(() => {
+        const dot = document.createElement('div');
+        dot.style.cssText = 'width:5px;height:5px;background:#00ffff;border-radius:50%;position:absolute;box-shadow:0 0 10px #00ffff;';
+        dot.style.left = Math.random() * 90 + 5 + '%';
+        dot.style.top = Math.random() * 80 + 10 + '%';
+        pings.appendChild(dot);
+        setTimeout(() => dot.remove(), 2000);
+    }, 1000);
+</script><div class="box status-panel">
             <h3>TARGETS</h3>
             <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
                 <span style="font-size:2rem;">☁️</span><br>
@@ -100,6 +116,7 @@
     </script>
 </body>
 </html>
+
 
 
 

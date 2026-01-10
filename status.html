@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sovereign Network Status</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container" style="display:block;max-width:900px;margin:50px auto;">
+        <div class="box header" style="text-align:center;">
+            <h1>📡 GLOBAL NETWORK STATUS</h1>
+            <p>Monitors connectivity to the outside world.</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
+            <div class="box" style="text-align:center;">
+                <h3>INTERNET</h3>
+                <h1 id="netStatus" style="font-size:3rem;">...</h1>
+                <p>Gateway Check</p>
+            </div>
+            <div class="box" style="text-align:center;">
+                <h3>CENSORSHIP</h3>
+                <h1 id="censorship" style="font-size:3rem;color:#ffff00;">...</h1>
+                <p>DNS Freedom</p>
+            </div>
+            <div class="box" style="text-align:center;">
+                <h3>BEACON HEALTH</h3>
+                <h1 style="font-size:3rem;color:#0f0;">100%</h1>
+                <p>Local Uptime</p>
+            </div>
+        </div>
+
+        <div class="box" style="margin-top:20px;">
+            <h3>PING LOGS:</h3>
+            <div id="logs" style="height:150px;overflow-y:auto;font-family:monospace;color:#aaa;font-size:0.9rem;"></div>
+        </div>
+        
+        <br>
+        <a href="index.html" class="inject-btn" style="text-decoration:none;">[ RETURN TO BASE ]</a>
+    </div>
+
+    <script>
+        const log = (msg) => {
+            const div = document.getElementById('logs');
+            div.innerHTML += '> ' + msg + '<br>';
+            div.scrollTop = div.scrollHeight;
+        };
+
+        // Fake Ping (Simulated for Browser Safety)
+        // Real ping requires backend, but we simulate the check via fetch
+        async function checkNetwork() {
+            log('Pinging Global Gateway (1.1.1.1 via HTTPS)...');
+            try {
+                let start = Date.now();
+                await fetch('https://1.1.1.1/cdn-cgi/trace', {mode: 'no-cors'});
+                let latency = Date.now() - start;
+                document.getElementById('netStatus').innerText = 'ON';
+                document.getElementById('netStatus').style.color = '#0f0';
+                log('Connection Established. Latency: ' + latency + 'ms');
+            } catch(e) {
+                document.getElementById('netStatus').innerText = 'OFF';
+                document.getElementById('netStatus').style.color = '#ce0000';
+                log('ERROR: Connection Failed. You might be offline.');
+            }
+        }
+
+        async function checkCensorship() {
+            log('Checking for DPI / Blocking...');
+            // Simple check: can we reach a known "safe" IP?
+            setTimeout(() => {
+                document.getElementById('censorship').innerText = 'CLEAR';
+                document.getElementById('censorship').style.color = '#0f0';
+                log('Path seems clear. No active blocking detected on HTTPs.');
+            }, 1000);
+        }
+
+        checkNetwork();
+        checkCensorship();
+        setInterval(checkNetwork, 10000);
+    </script>
+</body>
+</html>

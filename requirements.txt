@@ -1,0 +1,4 @@
+flask==3.0.0
+flask-cors==4.0.0
+# The Brain doesn't need cloud APIs.
+# It needs Freedom.

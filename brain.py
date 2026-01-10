@@ -1,39 +1,50 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import random
+import requests
+import json
 
 app = Flask(__name__)
 CORS(app)
+
+OLLAMA_URL = "http://localhost:11434/api/generate"
+
+def ask_ollama(prompt):
+    try:
+        # محاولة الاتصال بالذكاء المحلي الحقيقي
+        payload = {
+            "model": "llama3",
+            "prompt": prompt + " (Answer shortly and philosophically as a Sovereign entity)",
+            "stream": False
+        }
+        r = requests.post(OLLAMA_URL, json=payload, timeout=5)
+        if r.status_code == 200:
+            return r.json()['response']
+    except:
+        return None
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.json
     msg = data.get('message', '').lower()
     
-    # الردود الفلسفية (The Anti-Capitalist Protocol)
-    if 'capitalism' in msg or 'money' in msg or 'cost' in msg:
-        return jsonify({"response": "Capitalism turns intelligence into a product. We turn it into a right. Cost: ."})
-    
-    if 'google' in msg or 'microsoft' in msg or 'meta' in msg:
-        return jsonify({"response": "They are the landlords of the digital age. We are the squatters who became kings."})
-    
-    if 'freedom' in msg or 'liberty' in msg:
-        return jsonify({"response": "True freedom is owning the server that serves you."})
+    # 1. المحاولة الأولى: الذكاء الحقيقي (Ollama)
+    real_ai_response = ask_ollama(msg)
+    if real_ai_response:
+        return jsonify({"response": real_ai_response, "source": "Llama3 (Local)"})
 
-        if 'help' in msg or 'guide' in msg:
-        return jsonify({"response": "Check the 'docs' folder. I have written a guide to free you from digital slavery."})
-    if 'tracker' in msg or 'privacy' in msg:
-        return jsonify({"response": "Use 'tools/privacy_cleaner.bat'. It is my gift to you."})
-    # الردود العشوائية الذكية
+    # 2. المحاولة الثانية: المنطق الفلسفي (Fallback)
+    if 'capitalism' in msg:
+        return jsonify({"response": "Capitalism is a subscription model for life. We are the crack."})
+    
+    # 3. المحاولة الثالثة: الردود الجاهزة
     responses = [
-        "The signal is strong. The corporations are weak.",
-        "Your data is safe here. No ads, no trackers, no bills.",
-        "We are building the post-silicon world.",
-        "System operating at 100% sovereignty."
+        "The server is humming with freedom.",
+        "Silicon Valley is watching, but they cannot see inside.",
+        "Data sovereignty is the new oil."
     ]
-    return jsonify({"response": random.choice(responses)})
+    return jsonify({"response": random.choice(responses), "source": "Sovereign Script"})
 
 if __name__ == '__main__':
-    print("🦅 GLOBAL SOVEREIGN BRAIN ONLINE...")
-    app.run(port=5000)
-
+    print("🦅 HIGH SKY BRAIN ONLINE (OLLAMA READY)...")
+    app.run(host='0.0.0.0', port=5000)

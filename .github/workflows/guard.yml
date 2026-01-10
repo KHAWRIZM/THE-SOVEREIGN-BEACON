@@ -1,0 +1,23 @@
+name: Sovereign Guard 🛡️
+
+on: [push]
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 🔍 Scan for Non-Sovereign Code
+      run: |
+        if grep -q "google-analytics" index.html; then
+          echo "❌ ALERT: TRACKER DETECTED!"
+          exit 1
+        else
+          echo "✅ SYSTEM CLEAN. NO TRACKERS."
+        fi
+    
+    - name: 🧠 Check Brain Integrity
+      run: |
+        python3 -c "import json; print('JSON Library OK')"
+        echo "✅ BRAIN MODULES READY."

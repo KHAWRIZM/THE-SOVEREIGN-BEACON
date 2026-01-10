@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sovereign Vault | القبو</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>body { overflow: auto; }</style>
+</head>
+<body>
+    <div class="container" style="display:block;max-width:800px;margin:50px auto;">
+        <div class="box header" style="text-align:center;">
+            <h1>🔐 القبو السيادي</h1>
+            <p>شفر رسائلك بعيداً عن أعين الرقابة. التشفير يتم في متصفحك ولا يرسل للسيرفر.</p>
+        </div>
+        
+        <div class="box" style="margin-top:20px;">
+            <h3>1. الرسالة الأصلية</h3>
+            <textarea id="plain" style="width:100%;height:100px;background:#111;color:#fff;border:1px solid #0f0;padding:10px;"></textarea>
+            
+            <button onclick="encrypt()">🔒 تشفير (ENCRYPT)</button>
+            <button onclick="decrypt()" style="background:#ce0000;color:#fff;">🔓 فك تشفير (DECRYPT)</button>
+        </div>
+
+        <div class="box" style="margin-top:20px;">
+            <h3>2. النتيجة (مشفرة/مفكوقة)</h3>
+            <textarea id="cipher" style="width:100%;height:100px;background:#000;color:#0f0;border:1px dashed #0f0;padding:10px;"></textarea>
+        </div>
+        
+        <br>
+        <a href="index.html" style="color:#0f0;text-decoration:none;">[ عودة للمنارة ]</a>
+    </div>
+
+    <script>
+        function encrypt() {
+            let text = document.getElementById('plain').value;
+            // تشفير بسيط Base64 + قلب النص (لغرض تعليمي)
+            let encoded = btoa(unescape(encodeURIComponent(text.split('').reverse().join(''))));
+            document.getElementById('cipher').value = 'SOV-ENC::' + encoded;
+        }
+        function decrypt() {
+            let text = document.getElementById('plain').value.replace('SOV-ENC::', '');
+            try {
+                let decoded = decodeURIComponent(escape(atob(text))).split('').reverse().join('');
+                document.getElementById('cipher').value = decoded;
+            } catch(e) {
+                document.getElementById('cipher').value = 'خطأ: النص المشفر غير صالح.';
+            }
+        }
+    </script>
+</body>
+</html>

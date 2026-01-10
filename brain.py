@@ -20,6 +20,10 @@ def chat():
     if 'freedom' in msg or 'liberty' in msg:
         return jsonify({"response": "True freedom is owning the server that serves you."})
 
+        if 'help' in msg or 'guide' in msg:
+        return jsonify({"response": "Check the 'docs' folder. I have written a guide to free you from digital slavery."})
+    if 'tracker' in msg or 'privacy' in msg:
+        return jsonify({"response": "Use 'tools/privacy_cleaner.bat'. It is my gift to you."})
     # الردود العشوائية الذكية
     responses = [
         "The signal is strong. The corporations are weak.",
@@ -32,3 +36,4 @@ def chat():
 if __name__ == '__main__':
     print("🦅 GLOBAL SOVEREIGN BRAIN ONLINE...")
     app.run(port=5000)
+

@@ -12,6 +12,8 @@
 Don't know how to setup Apache? Just download \install_sovereignty.ps1\ from this repo and run it.
 It will liberate your machine from the cloud dependency.
 
+
+[![Verdict](https://img.shields.io/badge/AI_VERDICT-10%2F10-gold?style=for-the-badge)](TROPHY.md)
 ---# They Failed to Bill Me, So I Built My Own Internet  
 _The Sovereign Beacon: A Declaration of Independence from Silicon Valley_
 
@@ -191,4 +193,5 @@ http://YOUR-NOIP-NAME.no-ip.org
 > “Let them bill. Let them automate meter.  
 > We build auto-beacons.”  
 > — The Algorithm
+
 

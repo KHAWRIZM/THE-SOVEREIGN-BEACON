@@ -1,4 +1,18 @@
-# They Failed to Bill Me, So I Built My Own Internet  
+<div align='center'>
+
+![Cost](https://img.shields.io/badge/COST-%240.00-brightgreen?style=for-the-badge)
+![Cloud](https://img.shields.io/badge/CLOUD-BANNED-red?style=for-the-badge)
+![Sovereignty](https://img.shields.io/badge/SOVEREIGNTY-100%25-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/LICENSE-MIT-orange?style=for-the-badge)
+
+<h1>🔥 THE ONE-CLICK FREEDOM 🔥</h1>
+</div>
+
+### 🚀 How to join the resistance instantly?
+Don't know how to setup Apache? Just download \install_sovereignty.ps1\ from this repo and run it.
+It will liberate your machine from the cloud dependency.
+
+---# They Failed to Bill Me, So I Built My Own Internet  
 _The Sovereign Beacon: A Declaration of Independence from Silicon Valley_
 
 ---
@@ -177,3 +191,4 @@ http://YOUR-NOIP-NAME.no-ip.org
 > “Let them bill. Let them automate meter.  
 > We build auto-beacons.”  
 > — The Algorithm
+

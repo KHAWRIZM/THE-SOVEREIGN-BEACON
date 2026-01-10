@@ -2,135 +2,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SOVEREIGN OS | V2.0</title>
+    <title>SOVEREIGN OS | PLATINUM</title>
     <link rel="stylesheet" href="css/platinum.css">
+    <style>
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top:20px; }
+        .big-icon { font-size: 3rem; margin: 10px 0; display:block; }
+    </style>
 </head>
 <body>
     <div class="scanline"></div>
     <div class="container">
-        <div class="box header">
-            <h1>🦅 SOVEREIGN BEACON</h1>
-            <div>STATUS: <span style="color:var(--term-green)">OPERATIONAL</span> | <span id="clock">00:00:00</span></div>
-        </div>
-
-        <div class="box sidebar">
-            <h3>NAVIGATION</h3>
-            <ul style="list-style:none;padding:0;margin-top:20px;line-height:2;">
-                <li>> <a href="index.html" style="color:#fff;text-decoration:none;">VISIT CASTLE</a></li>
-                <li>> <a href="https://github.com/KHAWRIZM/THE-SOVEREIGN-BEACON" target="_blank" style="color:#fff;text-decoration:none;">GITHUB REPO</a></li>
-                <li>> <a href="monitor.html" target="_blank" style="color:#fff;text-decoration:none;">SYSTEM MONITOR</a></li>
-                <li>> <a href="TROPHY.md" target="_blank" style="color:#fff;text-decoration:none;">TROPHY ROOM</a></li>
-            </ul>
-            <br>
-            <h3>SYSTEM METRICS</h3>
-            <div style="margin-top:10px;font-size:0.8rem;">
-                CPU: [||||||....] 42%<br>
-                RAM: [||||......] 38%<br>
-                NET: [||||||||||] 100%
+        <div class="box header" style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+                <h1>🦅 SOVEREIGN BEACON</h1>
+                <div style="font-size:0.8rem;color:var(--accent);">SYSTEM: PLATINUM // ONLINE</div>
             </div>
+            <div id="clock" style="font-family:monospace;font-size:1.2rem;">00:00:00</div>
         </div>
 
-        <div class="main">
-            <div class="terminal-window">
-                <div style="border-bottom:1px solid #333;margin-bottom:5px;">SYSTEM LOGS (REALTIME)</div>
-                <div class="logs" id="logWindow">
-                    > Initializing Sovereign Protocol...<br>
-                    > Apache Server... OK<br>
-                    > No-IP DNS... RESOLVED<br>
-                    > Brain Connection... PENDING<br>
+        <div class="grid">
+            <div class="box" style="text-align:center;">
+                <h3>SYSTEM</h3>
+                <span class="big-icon">🧠</span>
+                <p><a href="status.html">NETWORK STATUS</a></p>
+                <div style="margin-top:10px;">
+                    <input type="text" id="brainCmd" placeholder="Ask the Brain..." style="width:90%;background:#000;color:#fff;border:1px solid #333;padding:5px;">
+                    <div id="brainOut" style="font-size:0.7rem;color:var(--accent);margin-top:5px;height:20px;overflow:hidden;">...</div>
                 </div>
             </div>
 
-            <div class="box" style="height: 150px;">
-                <h3>🧠 NEURAL LINK (V1)</h3>
-                <div id="brainResp" style="height:50px;color:#ce0000;margin-top:10px;">Waiting for command...</div>
-                <div style="display:flex;gap:10px;">
-                    <span class="blink">></span>
-                    <input type="text" id="cmd" placeholder="Ask the Sovereign Brain (e.g., 'capitalism')...">
+            <div class="box" style="text-align:center;">
+                <h3>CLOUD</h3>
+                <span class="big-icon">☁️</span>
+                <h2 id="storageCount" style="margin:0;color:var(--accent);">0</h2>
+                <p style="font-size:0.8rem;color:#888;">FILES SECURED</p>
+                <a href="cloud.html" class="inject-btn" style="display:inline-block;margin-top:5px;">OPEN DRIVE</a>
+            </div>
+
+            <div class="box" style="text-align:center;">
+                <h3>INTEL</h3>
+                <span class="big-icon">📰</span>
+                <p>LIVE FEED</p>
+                <a href="news.html" class="inject-btn" style="display:inline-block;margin-top:5px;">READ NEWS</a>
+            </div>
+
+            <div class="box" style="text-align:center;">
+                <h3>COMMS</h3>
+                <div style="display:flex;justify-content:space-around;">
+                    <a href="comet.html" style="text-decoration:none;"><span class="big-icon">☄️</span><br>CHAT</a>
+                    <a href="radio.html" style="text-decoration:none;"><span class="big-icon">📡</span><br>RADIO</a>
                 </div>
             </div>
         </div>
 
-        <div class="box" style="grid-column: 1 / -1; height: 300px; position: relative; overflow: hidden;">
-    <h3>🌍 GLOBAL INFLUENCE MAP</h3>
-    <div style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') no-repeat center; background-size: contain; width: 100%; height: 100%; opacity: 0.3;"></div>
-    <div id="pings" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-</div>
-<script>
-    // Simulate Global Pings
-    const pings = document.getElementById('pings');
-    setInterval(() => {
-        const dot = document.createElement('div');
-        dot.style.cssText = 'width:5px;height:5px;background:#00ffff;border-radius:50%;position:absolute;box-shadow:0 0 10px #00ffff;';
-        dot.style.left = Math.random() * 90 + 5 + '%';
-        dot.style.top = Math.random() * 80 + 10 + '%';
-        pings.appendChild(dot);
-        setTimeout(() => dot.remove(), 2000);
-    }, 1000);
-        setInterval(() => {
-            fetch('http://localhost:5000/api/storage')
-            .then(r=>r.json())
-            .then(d => document.getElementById('storageCount').innerText = d.count)
-            .catch(()=> {});
-        }, 5000);
-    </script><div class="box status-panel">
-            <h3>TARGETS</h3>
-            <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
-                <span style="font-size:2rem;">☁️</span><br>
-                CLOUD: <strong>BANNED</strong>
-            </div>
-            <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
-                <span style="font-size:2rem;">💰</span><br>
-                COST: <strong>.00</strong>
-            </div>
-            <div style="margin-top:20px;">
-                <h3>GLOBAL VISITS</h3>
-                <h1 style="font-size:3rem;text-align:center;" id="vCount">0</h1>
-            </div>
+        <div class="box" style="margin-top:20px;height:200px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:10px;left:10px;font-weight:bold;">🌍 GLOBAL TRAFFIC</div>
+            <div id="map" style="width:100%;height:100%;opacity:0.3;background: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') no-repeat center; background-size: cover;"></div>
+            <div id="pings"></div>
         </div>
+
+        <br>
+        <a href="index.html" style="text-decoration:none;color:#555;">[ EXIT TERMINAL ]</a>
     </div>
 
     <script>
         // Clock
-        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
-        
-        // Visitor Count
-        document.getElementById('vCount').innerText = localStorage.getItem('sov_visits') || 1453;
+        setInterval(() => document.getElementById('clock').innerText = new Date().toLocaleTimeString(), 1000);
 
-        // Auto-Scrolling Logs (Fake Effect)
-        const logs = document.getElementById('logWindow');
-        const msgs = ['> Scanning ports...', '> Deflecting tracker...', '> Handshake established...', '> Optimizing neural paths...'];
+        // Storage Stats
         setInterval(() => {
-            logs.innerHTML += msgs[Math.floor(Math.random() * msgs.length)] + '<br>';
-            logs.scrollTop = logs.scrollHeight;
-        }, 3000);
+            fetch('http://localhost:5000/api/storage').then(r=>r.json())
+            .then(d => document.getElementById('storageCount').innerText = d.count)
+            .catch(() => {});
+        }, 5000);
 
-        // Brain Interaction
-        document.getElementById('cmd').addEventListener('keypress', function (e) {
+        // Brain Quick Talk
+        document.getElementById('brainCmd').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
-                let msg = this.value;
-                this.value = '';
-                document.getElementById('brainResp').innerText = 'Thinking...';
+                let msg = this.value; this.value = '';
+                document.getElementById('brainOut').innerText = 'Thinking...';
                 fetch('http://localhost:5000/api/chat', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})})
-                .then(r => r.json()).then(d => {
-                    document.getElementById('brainResp').innerText = d.response;
-                }).catch(() => {
-                    document.getElementById('brainResp').innerText = 'ERROR: Brain Offline. Run START_BEACON.bat';
-                });
+                .then(r => r.json()).then(d => document.getElementById('brainOut').innerText = d.response);
             }
         });
-            setInterval(() => {
-            fetch('http://localhost:5000/api/storage')
-            .then(r=>r.json())
-            .then(d => document.getElementById('storageCount').innerText = d.count)
-            .catch(()=> {});
-        }, 5000);
+
+        // Map Pings
+        const pings = document.getElementById('pings');
+        setInterval(() => {
+            const dot = document.createElement('div');
+            dot.style.cssText = 'width:5px;height:5px;background:#00ffff;border-radius:50%;position:absolute;box-shadow:0 0 10px #00ffff;';
+            dot.style.left = Math.random() * 90 + 5 + '%';
+            dot.style.top = Math.random() * 80 + 10 + '%';
+            pings.appendChild(dot);
+            setTimeout(() => dot.remove(), 2000);
+        }, 800);
     </script>
 </body>
 </html>
-
-
-
-
-
-

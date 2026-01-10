@@ -1,9 +1,13 @@
 @echo off
-title SOVEREIGN GUARD 🛡️
-echo Starting Apache...
+title SOVEREIGN COMMANDER 🦅
+echo [1/2] Starting Apache...
 cd /d "C:\Apache24\bin"
-httpd.exe -k start
+start httpd.exe -k start
+echo [2/2] Starting Brain Core (Python)...
+cd /d "C:\Apache24\htdocs"
+start /min python brain.py
 echo.
-echo [SECURE] The Beacon is Active.
-echo Monitor: http://localhost/monitor.html
+echo ✅ ALL SYSTEMS GO.
+echo Opening Dashboard...
+start http://localhost/DASHBOARD.html
 pause

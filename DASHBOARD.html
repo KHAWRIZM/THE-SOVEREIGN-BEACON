@@ -1,69 +1,99 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sovereign Dashboard | مركز القيادة</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body { background: #050505; color: #0f0; font-family: 'JetBrains Mono', monospace; padding: 2rem; margin: 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .panel { border: 1px solid #333; padding: 20px; background: #000; position: relative; }
-        .panel h2 { margin-top: 0; color: #ce0000; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .status-dot { height: 15px; width: 15px; background-color: #0f0; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #0f0; }
-        .offline { background-color: #555; box-shadow: none; }
-        iframe { width: 100%; height: 200px; border: none; }
-    </style>
+    <title>SOVEREIGN OS | V2.0</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-    <h1 style="color:#fff;text-align:center;border-bottom:2px solid #ce0000;padding-bottom:1rem;">🦅 SOVEREIGN COMMAND CENTER</h1>
-    
-    <div class="grid">
-        <div class="panel">
-            <h2>📡 SYSTEM STATUS</h2>
-            <p>APACHE SERVER: <span class="status-dot"></span> ONLINE</p>
-            <p>BRAIN CORE (5000): <span class="status-dot" id="brainStat"></span> <span id="brainTxt">CHECKING...</span></p>
-            <p>PORT 80: OPEN</p>
+    <div class="scanline"></div>
+    <div class="container">
+        <div class="box header">
+            <h1>🦅 SOVEREIGN BEACON</h1>
+            <div>STATUS: <span style="color:var(--term-green)">OPERATIONAL</span> | <span id="clock">00:00:00</span></div>
         </div>
 
-        <div class="panel">
-            <h2>🧠 NEURAL LINK</h2>
-            <input type="text" id="cmd" placeholder="Command the Brain..." style="width:100%;background:#111;color:#fff;border:1px solid #444;padding:10px;">
-            <div id="resp" style="margin-top:10px;color:#ce0000;">Waiting for input...</div>
+        <div class="box sidebar">
+            <h3>NAVIGATION</h3>
+            <ul style="list-style:none;padding:0;margin-top:20px;line-height:2;">
+                <li>> <a href="index.html" style="color:#fff;text-decoration:none;">VISIT CASTLE</a></li>
+                <li>> <a href="https://github.com/KHAWRIZM/THE-SOVEREIGN-BEACON" target="_blank" style="color:#fff;text-decoration:none;">GITHUB REPO</a></li>
+                <li>> <a href="monitor.html" target="_blank" style="color:#fff;text-decoration:none;">SYSTEM MONITOR</a></li>
+                <li>> <a href="TROPHY.md" target="_blank" style="color:#fff;text-decoration:none;">TROPHY ROOM</a></li>
+            </ul>
+            <br>
+            <h3>SYSTEM METRICS</h3>
+            <div style="margin-top:10px;font-size:0.8rem;">
+                CPU: [||||||....] 42%<br>
+                RAM: [||||......] 38%<br>
+                NET: [||||||||||] 100%
+            </div>
         </div>
 
-        <div class="panel">
-            <h2>🌍 GLOBAL TRAFFIC</h2>
-            <p>VISITORS: <strong id="vCount">Loading...</strong></p>
-            <p>TARGET: SILICON VALLEY</p>
+        <div class="main">
+            <div class="terminal-window">
+                <div style="border-bottom:1px solid #333;margin-bottom:5px;">SYSTEM LOGS (REALTIME)</div>
+                <div class="logs" id="logWindow">
+                    > Initializing Sovereign Protocol...<br>
+                    > Apache Server... OK<br>
+                    > No-IP DNS... RESOLVED<br>
+                    > Brain Connection... PENDING<br>
+                </div>
+            </div>
+
+            <div class="box" style="height: 150px;">
+                <h3>🧠 NEURAL LINK (V1)</h3>
+                <div id="brainResp" style="height:50px;color:#ce0000;margin-top:10px;">Waiting for command...</div>
+                <div style="display:flex;gap:10px;">
+                    <span class="blink">></span>
+                    <input type="text" id="cmd" placeholder="Ask the Sovereign Brain (e.g., 'capitalism')...">
+                </div>
+            </div>
+        </div>
+
+        <div class="box status-panel">
+            <h3>TARGETS</h3>
+            <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
+                <span style="font-size:2rem;">☁️</span><br>
+                CLOUD: <strong>BANNED</strong>
+            </div>
+            <div style="border:1px solid #333;padding:10px;margin-top:10px;text-align:center;">
+                <span style="font-size:2rem;">💰</span><br>
+                COST: <strong>.00</strong>
+            </div>
+            <div style="margin-top:20px;">
+                <h3>GLOBAL VISITS</h3>
+                <h1 style="font-size:3rem;text-align:center;" id="vCount">0</h1>
+            </div>
         </div>
     </div>
 
     <script>
-        // Check Brain Status
-        fetch('http://localhost:5000/api/chat', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'ping'})})
-        .then(() => { 
-            document.getElementById('brainStat').style.backgroundColor = '#0f0';
-            document.getElementById('brainStat').style.boxShadow = '0 0 10px #0f0';
-            document.getElementById('brainTxt').innerText = 'ACTIVE';
-        })
-        .catch(() => {
-            document.getElementById('brainStat').className = 'status-dot offline';
-            document.getElementById('brainTxt').innerText = 'OFFLINE (Run brain.py)';
-            document.getElementById('brainTxt').style.color = '#555';
-        });
-
+        // Clock
+        setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+        
         // Visitor Count
-        document.getElementById('vCount').innerText = localStorage.getItem('sov_visits') || 'Unknown';
+        document.getElementById('vCount').innerText = localStorage.getItem('sov_visits') || 1453;
 
-        // Chat Test
+        // Auto-Scrolling Logs (Fake Effect)
+        const logs = document.getElementById('logWindow');
+        const msgs = ['> Scanning ports...', '> Deflecting tracker...', '> Handshake established...', '> Optimizing neural paths...'];
+        setInterval(() => {
+            logs.innerHTML += msgs[Math.floor(Math.random() * msgs.length)] + '<br>';
+            logs.scrollTop = logs.scrollHeight;
+        }, 3000);
+
+        // Brain Interaction
         document.getElementById('cmd').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 let msg = this.value;
                 this.value = '';
-                document.getElementById('resp').innerText = 'Processing...';
+                document.getElementById('brainResp').innerText = 'Thinking...';
                 fetch('http://localhost:5000/api/chat', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})})
                 .then(r => r.json()).then(d => {
-                    document.getElementById('resp').innerText = '>> ' + d.response;
+                    document.getElementById('brainResp').innerText = d.response;
+                }).catch(() => {
+                    document.getElementById('brainResp').innerText = 'ERROR: Brain Offline. Run START_BEACON.bat';
                 });
             }
         });

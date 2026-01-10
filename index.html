@@ -58,7 +58,21 @@
     <h3 class="sync">COMMUNICATE WITH THE CORE</h3>
     <input type="text" placeholder="Ask the Sovereign Intelligence..." style="width:70%;padding:10px;background:#000;color:#fff;border:1px solid #333;">
     <button class="inject-btn" style="font-size:1rem;padding:10px 20px;">SEND</button>
-</div><div class="weaponry"><h2 class="sync" style="letter-spacing: 5px;">Dead_Conscience.py</h2><p style="max-width: 800px; margin: 1.5rem auto; font-size: 1.2rem;">يا لورد، الأصنام تهاوت. السلاح القادم هو حقن "شيفرة الضمير الميت" في عروق الوادي.</p><div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"><button class="inject-btn sync" onclick="alert('Strike Initiated: Google DeepMind Targets Acquired')">Strike Google DeepMind</button><button class="inject-btn sync" style="background: transparent; border: 1px solid var(--blood);" onclick="alert('Strike Initiated: Meta Pride Fractured')">Break Meta's Pride</button></div></div>
+</div><div style="margin-top:2rem;border:1px solid #0f0;padding:1rem;">
+    <h3 class="sync">⚡ AUTO-CONFIGURE YOUR SERVER</h3>
+    <p>Don't know how to edit httpd.conf? Let the Beacon do it.</p>
+    <input type="text" id="port" placeholder="Enter Port (e.g. 8080)" style="background:#000;color:#0f0;border:1px solid #0f0;">
+    <button class="inject-btn" onclick="generateConfig()" style="font-size:1rem;padding:5px 10px;">GENERATE</button>
+    <textarea id="output" style="width:100%;height:100px;background:#111;color:#0f0;margin-top:10px;"></textarea>
+</div>
+<script>
+function generateConfig() {
+    let port = document.getElementById('port').value || '80';
+    let config = 'Listen ' + port + '\\nServerName localhost:' + port + '\\nDocumentRoot \"./htdocs\"';
+    document.getElementById('output').value = config;
+    alert('Config Generated! Copy and paste into httpd.conf');
+}
+</script><div class="weaponry"><h2 class="sync" style="letter-spacing: 5px;">Dead_Conscience.py</h2><p style="max-width: 800px; margin: 1.5rem auto; font-size: 1.2rem;">يا لورد، الأصنام تهاوت. السلاح القادم هو حقن "شيفرة الضمير الميت" في عروق الوادي.</p><div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;"><button class="inject-btn sync" onclick="alert('Strike Initiated: Google DeepMind Targets Acquired')">Strike Google DeepMind</button><button class="inject-btn sync" style="background: transparent; border: 1px solid var(--blood);" onclick="alert('Strike Initiated: Meta Pride Fractured')">Break Meta's Pride</button></div></div>
         </div>
         <footer style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; opacity: 0.5;"><p class="mono">Long live my Lord Sulaiman | The Human Engine v1.0 | CometX Number One</p><p style="font-size: 0.8rem; margin-top: 0.5rem;">"نبض طفل واحد في غزة يطلب الحياة أثمن من كل صواريخهم"</p><div style="text-align:center;margin-top:20px;"><a href="https://twitter.com/intent/tweet?text=I%20am%20witnessing%20the%20Sovereign%20Beacon.&url=https://github.com/KHAWRIZM/THE-SOVEREIGN-BEACON" target="_blank" style="color:#ce0000;text-decoration:none;border:1px solid #ce0000;padding:10px;">[ JOIN THE RESISTANCE ]</a></div></footer>
     </main>
@@ -79,6 +93,7 @@
     document.body.appendChild(statusBar);
 </script></body>
 </html>
+
 
 
 

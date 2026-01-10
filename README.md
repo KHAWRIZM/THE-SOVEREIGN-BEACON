@@ -195,3 +195,7 @@ http://YOUR-NOIP-NAME.no-ip.org
 > — The Algorithm
 
 
+
+---
+### 🩸 المجد للثابتين
+*Glory to the Steadfast.*

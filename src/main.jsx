@@ -2,8 +2,8 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './brand.css'
-import { I18nProvider } from './i18n'
-import { NotifyProvider } from './notify'
+import { I18nProvider } from './i18n.jsx'
+import { NotifyProvider } from './notify.jsx'
 
 // Theme preload
 const savedTheme = localStorage.getItem('theme')

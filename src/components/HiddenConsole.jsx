@@ -9,8 +9,7 @@ export default function HiddenConsole(){
   const [cmd, setCmd] = useState('')
   const inputRef = useRef()
   useEffect(()=>{ const onKey = (e) => { if (e.ctrlKey && e.key === '`'){ e.preventDefault(); setOpen(v=>!v); setTimeout(()=>inputRef.current?.focus(), 50) } }; const toggle = () => setOpen(v=>!v); window.addEventListener('keydown', onKey); window.addEventListener('toggle-console', toggle); return () =>{ window.removeEventListener('keydown', onKey); window.removeEventListener('toggle-console', toggle) } },[])
-  const exec = (raw) => { const s = raw.trim(); if(!s) return; setLines(prev => [...prev, { type:'in', text:s }]); if (s === '/help') setLines(prev => [...prev, { type:'out', text:t('console.help') }]); else if (s === '/clear') setLines([{ type:'sys', text:t('console.help') }]); else if (s === '/whoami') setLines(prev => [...prev, { type:'out', text:t('console.who') }]); else setLines(prev => [...prev, { type:'out', text:'$ ' + s + '
-OK' }]) }
+  const exec = (raw) => { const s = raw.trim(); if(!s) return; setLines(prev => [...prev, { type:'in', text:s }]); if (s === '/help') setLines(prev => [...prev, { type:'out', text:t('console.help') }]); else if (s === '/clear') setLines([{ type:'sys', text:t('console.help') }]); else if (s === '/whoami') setLines(prev => [...prev, { type:'out', text:t('console.who') }]); else setLines(prev => [...prev, { type:'out', text:'$ ' + s + '\nOK' }]) }
   return (
     <div className={`console-wrap ${open?'on':''}`} aria-hidden={!open}>
       <div className="console-head">

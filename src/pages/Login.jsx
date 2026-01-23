@@ -29,7 +29,7 @@ export default function Login(){
           <h3 style={{ margin:0 }}>{t('login.title')}</h3>
         </div>
         <form onSubmit={onSubmit} style={{ display:'grid', gap:10 }}>
-          <label>{t('login.email')}<input name="email" type="email" autoComplete="username" required placeholder="you@dragon403.com" style={{ width:'100%', padding:10, borderRadius:10, border:'1px solid var(--line)', background:'#0c1217', color:'var(--text)' }}/></label>
+          <label>{t('login.email')}<input name="email" type="email" autoComplete="username" required placeholder="you@example.com" style={{ width:'100%', padding:10, borderRadius:10, border:'1px solid var(--line)', background:'#0c1217', color:'var(--text)' }}/></label>
           <label>{t('login.password')}<input name="password" type="password" autoComplete="current-password" required placeholder="••••••••" style={{ width:'100%', padding:10, borderRadius:10, border:'1px solid var(--line)', background:'#0c1217', color:'var(--text)' }}/></label>
           <label className="row" style={{ justifyContent:'space-between' }}>
             <span className="row" style={{ gap:8 }}><input name="remember" type="checkbox" /> {t('login.remember')}</span>

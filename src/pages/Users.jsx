@@ -4,12 +4,12 @@ import { useI18n } from '../i18n'
 import { useNotify } from '../notify'
 
 const SEED = [
-  { id:'U-1001', name:'Sulaiman Alshammari', email:'sulaiman@dragon403.com', role:'admin',   status:'active'  },
-  { id:'U-1002', name:'Noura',               email:'noura@dragon403.com',    role:'analyst', status:'active'  },
-  { id:'U-1003', name:'Fahad',               email:'fahad@dragon403.com',    role:'viewer',  status:'pending' },
-  { id:'U-1004', name:'Leila',               email:'leila@dragon403.com',    role:'analyst', status:'blocked' },
-  { id:'U-1005', name:'Omar',                email:'omar@dragon403.com',     role:'viewer',  status:'active'  },
-  { id:'U-1006', name:'Zahra',               email:'zahra@dragon403.com',    role:'analyst', status:'active'  },
+  { id:'U-1001', name:'Admin User', email:'admin@example.com', role:'admin',   status:'active'  },
+  { id:'U-1002', name:'Noura',               email:'noura@example.com',    role:'analyst', status:'active'  },
+  { id:'U-1003', name:'Fahad',               email:'fahad@example.com',    role:'viewer',  status:'pending' },
+  { id:'U-1004', name:'Leila',               email:'leila@example.com',    role:'analyst', status:'blocked' },
+  { id:'U-1005', name:'Omar',                email:'omar@example.com',     role:'viewer',  status:'active'  },
+  { id:'U-1006', name:'Zahra',               email:'zahra@example.com',    role:'analyst', status:'active'  },
 ]
 
 export default function Users(){

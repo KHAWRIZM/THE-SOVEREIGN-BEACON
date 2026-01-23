@@ -7,7 +7,7 @@ import Logout from './pages/Logout'
 import Users from './pages/Users'
 import Chat from './pages/Chat'
 import HiddenConsole from './components/HiddenConsole'
-import { AuthProvider, Guard } from './auth'
+import { AuthProvider, Guard } from './auth.jsx'
 
 export default function App(){
   return (
